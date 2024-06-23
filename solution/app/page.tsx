@@ -32,6 +32,7 @@ const Home = () => {
     updateExtractedData,
     requestMethod,
     requestHeaders,
+    customHeadersEnabled,
   }: AppStore = useAppStore();
 
   const [srcDoc, setSrcDoc] = useState("");
@@ -41,10 +42,14 @@ const Home = () => {
   };
 
   const handleFetch = async () => {
+    let ch = {};
+    if (customHeadersEnabled) {
+      ch = requestHeaders.filter((rH) => rH.active === true);
+    }
     const res = await httpClient().post(`api/fetchUrl`, {
       targetUrl: urlToFetch,
       method: requestMethod,
-      customHeaders: requestHeaders.filter((rH) => rH.active === true),
+      customHeaders: ch,
     });
     updateDataToBeProcessed(res.data);
   };
@@ -57,8 +62,13 @@ const Home = () => {
     updateExtractedData(parse(res.data));
   };
 
+  const prettify = async () => {
+    updateDataExtractModel(stringify(parse(dataExtractModel)));
+  };
+
   useEffect(() => {
     applyModel();
+    prettify();
     showPreview();
   }, []);
 
@@ -121,12 +131,7 @@ const Home = () => {
           <Button className="w-full" onClick={applyModel}>
             Apply
           </Button>
-          <Button
-            className="w-full"
-            onClick={() =>
-              updateDataExtractModel(stringify(parse(dataExtractModel)))
-            }
-          >
+          <Button className="w-full" onClick={prettify}>
             Prettify
           </Button>
         </div>

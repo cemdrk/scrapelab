@@ -8,6 +8,7 @@ import { create } from 'zustand';
 const useAppStore = create<AppStore>(set => (
     {
         requestHeaders: [],
+        customHeadersEnabled: true,
         addRequestHeader: (newReqHeader: ReqHeader) => set(state => (
             {
                 requestHeaders: [...state.requestHeaders, { ...newReqHeader }]
@@ -42,7 +43,6 @@ const useAppStore = create<AppStore>(set => (
                 }
             )
         ),
-
         updateReqHeaderActive: (index:number, checked:boolean) => set(
             state=> (
                 {
@@ -55,7 +55,13 @@ const useAppStore = create<AppStore>(set => (
                 }
         )
         ),
-
+        toggleCustomHeadersEnabled: (checked:boolean) => set(
+            _=> (
+                {
+                    customHeadersEnabled: checked
+                }
+            )
+        ),
         dataToBeProcessed: "<a href='localhost'>Test link</a>",
 
         updateDataToBeProcessed: (h: string) => set(_ => ({ dataToBeProcessed: h })),

@@ -2,8 +2,6 @@
 
 import { type AppStore } from "@/types/store";
 
-import { useState } from "react";
-
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
@@ -27,9 +25,10 @@ const RequestHeaders = () => {
     updateReqHeaderKey,
     updateReqHeaderVal,
     updateReqHeaderActive,
+    customHeadersEnabled,
+    toggleCustomHeadersEnabled,
   }: AppStore = useAppStore();
 
-  const [active, setActive] = useState(true);
   return (
     <>
       <Label>Custom Headers</Label>
@@ -38,10 +37,14 @@ const RequestHeaders = () => {
           <TableRow>
             <TableHead>
               <Checkbox
-                checked={active}
-                onCheckedChange={(checked: boolean) => setActive(!!checked)}
+                checked={customHeadersEnabled}
+                onCheckedChange={() =>
+                  toggleCustomHeadersEnabled(!customHeadersEnabled)
+                }
               />
-              <Label className="ml-1">{active ? "On" : "Off"}</Label>
+              <Label className="ml-1">
+                {customHeadersEnabled ? "On" : "Off"}
+              </Label>
             </TableHead>
             <TableHead>Key</TableHead>
             <TableHead>Value</TableHead>

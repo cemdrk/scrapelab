@@ -13,6 +13,7 @@ interface AppStore {
     dataExtractModel: string,
     extractedData: object,
     requestMethod: string,
+    customHeadersEnabled: boolean,
     addRequestHeader: (rh: ReqHeader) => void,
     deleteRequestHeader: (i: number) => void,
     updateReqHeaderKey: (i:number, k:string) => void,
@@ -23,6 +24,7 @@ interface AppStore {
     updateDataExtractModel: (m: string) => void,
     updateExtractedData: (ed: object) => void,
     updateRequestMethod: (rm: string) => void,
+    toggleCustomHeadersEnabled: (b: boolean) => void,
 }
 
 export type { ReqHeader, AppStore }
