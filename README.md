@@ -1,6 +1,8 @@
 
 # ScrapeLab
 
+![scrapelab](./docs/assets/scrapelab.png)
+
 ### Start
 
 ```shell

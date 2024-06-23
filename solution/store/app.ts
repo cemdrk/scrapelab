@@ -8,7 +8,9 @@ import { create } from 'zustand';
 const useAppStore = create<AppStore>(set => (
     {
         requestHeaders: [],
+
         customHeadersEnabled: true,
+
         addRequestHeader: (newReqHeader: ReqHeader) => set(state => (
             {
                 requestHeaders: [...state.requestHeaders, { ...newReqHeader }]

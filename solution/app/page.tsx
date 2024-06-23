@@ -73,7 +73,7 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="mt-10 container">
+    <main className="mt-2 flex flex-col justify-between container h-screen">
       <div className="flex justify-end">
         <ThemeSwitcher />
       </div>
@@ -83,7 +83,7 @@ const Home = () => {
           <MethodSelect />
           <div className="flex gap-2 w-full">
             <Input
-              placeholder="Url to be fetch"
+              placeholder="Url to fetch"
               defaultValue={urlToFetch}
               onChange={(e) => updateUrlToFetch(e.target.value)}
             />
@@ -97,10 +97,9 @@ const Home = () => {
 
       <div className="mt-5">
         <Label>Data To Be Extracted</Label>
-
-        <div>
+        <div className="mb-3">
           <Textarea
-            rows="15"
+            rows="10"
             value={dataToBeProcessed}
             onChange={(e) => updateDataToBeProcessed(e.target.value)}
           />
@@ -115,13 +114,13 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-1">
         <div className="flex justify-between mb-2">
           <Label>Data Extract Model (only for html)</Label>
         </div>
-        <div>
+        <div className="mb-3">
           <Textarea
-            rows="15"
+            rows="7"
             value={dataExtractModel}
             onChange={(e) => updateDataExtractModel(e.target.value)}
           />
@@ -138,7 +137,7 @@ const Home = () => {
       </div>
 
       <div className="mt-5">
-        <Textarea rows="20" value={stringify(extractedData)} readOnly />
+        <Textarea rows="7" value={stringify(extractedData)} readOnly />
       </div>
 
       <div className="mt-5 mb-5">
@@ -147,7 +146,7 @@ const Home = () => {
             Show Preview
           </Button>
         </div>
-        <iframe className="w-full" srcDoc={srcDoc}></iframe>
+        <iframe className="w-full border" srcDoc={srcDoc}></iframe>
       </div>
 
       <Footer />
