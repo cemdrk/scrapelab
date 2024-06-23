@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "./ui/select";
 
 import { useAppStore } from "@/store/app";
 
@@ -33,4 +33,4 @@ const MethodSelect = () => {
   );
 };
 
-export default MethodSelect;
+export { MethodSelect };

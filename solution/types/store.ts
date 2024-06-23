@@ -3,6 +3,7 @@
 interface ReqHeader {
     key: string,
     value: string,
+    active: boolean,
 }
 
 interface AppStore {
@@ -16,6 +17,7 @@ interface AppStore {
     deleteRequestHeader: (i: number) => void,
     updateReqHeaderKey: (i:number, k:string) => void,
     updateReqHeaderVal: (i:number, v:string) => void,
+    updateReqHeaderActive: (i:number, c:boolean) => void,
     updateDataToBeProcessed: (h: string) => void,
     updateUrlToFetch: (u: string) => void,
     updateDataExtractModel: (m: string) => void,

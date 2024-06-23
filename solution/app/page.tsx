@@ -1,26 +1,24 @@
 "use client";
+
 import { type AppStore } from "@/types/store";
 
 import { useState, useEffect } from "react";
 
-import { Footer } from "@/components/Footer";
-import { RequestHeaders } from "@/components/RequestHeaders";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import MethodSelect from "@/components/MethodSelect";
+import {
+  RequestHeaders,
+  ThemeSwitcher,
+  Button,
+  Form,
+  Input,
+  Label,
+  Textarea,
+  Footer,
+  MethodSelect,
+} from "@/components/index";
 
 import { useAppStore } from "@/store/app";
 
-import { 
-  parse, 
-  stringify, 
-  httpClient, 
-  exportData,
- } from "@/lib/utils";
+import { parse, stringify, httpClient, exportData } from "@/lib/utils";
 
 const Home = () => {
   const {
@@ -46,7 +44,7 @@ const Home = () => {
     const res = await httpClient().post(`api/fetchUrl`, {
       targetUrl: urlToFetch,
       method: requestMethod,
-      customHeaders: requestHeaders,
+      customHeaders: requestHeaders.filter((rH) => rH.active === true),
     });
     updateDataToBeProcessed(res.data);
   };

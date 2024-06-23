@@ -2,10 +2,12 @@
 
 import { type AppStore } from "@/types/store";
 
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useState } from "react";
+
+import { Button } from "./ui/button";
+import { Checkbox } from "./ui/checkbox";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import {
   Table,
   TableBody,
@@ -13,10 +15,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "./ui/table";
 
 import { useAppStore } from "@/store/app";
-import { useState } from "react";
 
 const RequestHeaders = () => {
   const {
@@ -25,6 +26,7 @@ const RequestHeaders = () => {
     deleteRequestHeader,
     updateReqHeaderKey,
     updateReqHeaderVal,
+    updateReqHeaderActive,
   }: AppStore = useAppStore();
 
   const [active, setActive] = useState(true);
@@ -37,14 +39,18 @@ const RequestHeaders = () => {
             <TableHead>
               <Checkbox
                 checked={active}
-                onCheckedChange={(checked:boolean) => setActive(!!checked)}
+                onCheckedChange={(checked: boolean) => setActive(!!checked)}
               />
               <Label className="ml-1">{active ? "On" : "Off"}</Label>
             </TableHead>
             <TableHead>Key</TableHead>
             <TableHead>Value</TableHead>
             <TableHead className="flex justify-end pr-0">
-              <Button onClick={() => addRequestHeader({ key: "", value: "" })}>
+              <Button
+                onClick={() =>
+                  addRequestHeader({ key: "", value: "", active: true })
+                }
+              >
                 Add
               </Button>
             </TableHead>
@@ -54,7 +60,12 @@ const RequestHeaders = () => {
           {requestHeaders.map((rh, idx) => (
             <TableRow key={idx}>
               <TableCell>
-                <Checkbox checked />
+                <Checkbox
+                  checked={rh.active}
+                  onCheckedChange={(checked: boolean) =>
+                    updateReqHeaderActive(idx, !!checked)
+                  }
+                />
               </TableCell>
               <TableCell>
                 <Input

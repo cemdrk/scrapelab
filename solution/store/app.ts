@@ -1,6 +1,6 @@
 // store/app.ts
 
-import type { ReqHeader, AppStore } from '@/types/store';
+import { type ReqHeader, AppStore } from '@/types/store';
 
 import { create } from 'zustand';
 
@@ -15,13 +15,13 @@ const useAppStore = create<AppStore>(set => (
         )),
         deleteRequestHeader: (index: number) => set(state => (
             {
-                requestHeaders: state.requestHeaders.filter((_, i) => i !== index)
+                requestHeaders: state.requestHeaders.filter((_, i:number) => i !== index)
             }
         )),
         updateReqHeaderKey: (index:number, k:string) => set(
             state=> (
                 {
-                    requestHeaders:state.requestHeaders.map((rh,i) => {
+                    requestHeaders:state.requestHeaders.map((rh:ReqHeader,i:number) => {
                         if (i===index) {
                             rh.key=k
                         }
@@ -33,15 +33,29 @@ const useAppStore = create<AppStore>(set => (
         updateReqHeaderVal: (index:number, v:string) => set(
             state=> (
                 {
-                    requestHeaders:state.requestHeaders.map((rh,i) => {
+                    requestHeaders:state.requestHeaders.map((rh:ReqHeader,i:number) => {
                         if (i===index) {
                             rh.value=v
                         }
                         return rh
                     })
                 }
-            ) 
+            )
         ),
+
+        updateReqHeaderActive: (index:number, checked:boolean) => set(
+            state=> (
+                {
+                    requestHeaders:state.requestHeaders.map((rh:ReqHeader,i:number) => {
+                        if (i===index) {
+                            rh.active=checked
+                        }
+                        return rh
+                    })
+                }
+        )
+        ),
+
         dataToBeProcessed: "<a href='localhost'>Test link</a>",
 
         updateDataToBeProcessed: (h: string) => set(_ => ({ dataToBeProcessed: h })),
