@@ -1,0 +1,14 @@
+
+services:
+  app:
+    build: .
+    # tty: true
+    entrypoint: sh entrypoint.sh
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./solution:/solution
+      - nm:/solution/node_modules
+
+volumes:
+  nm:
