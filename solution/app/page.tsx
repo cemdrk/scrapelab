@@ -129,7 +129,7 @@ const Home = () => {
               updateDataExtractModel(stringify(parse(dataExtractModel)))
             }
           >
-            Pret
+            Prettify
           </Button>
         </div>
       </div>
@@ -139,12 +139,12 @@ const Home = () => {
       </div>
 
       <div className="mt-5 mb-5">
-        <div className="">
+        <div className="mb-5">
           <Button className="w-full" onClick={showPreview}>
             Show Preview
           </Button>
         </div>
-        <iframe className="w-screen" srcDoc={srcDoc}></iframe>
+        <iframe className="w-full" srcDoc={srcDoc}></iframe>
       </div>
 
       <Footer />
