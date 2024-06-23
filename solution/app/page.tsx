@@ -112,7 +112,7 @@ const Home = () => {
         <div>
           <Textarea
             rows="15"
-            value={stringify(parse(dataExtractModel))}
+            value={dataExtractModel}
             onChange={(e) => updateDataExtractModel(e.target.value)}
           />
         </div>
